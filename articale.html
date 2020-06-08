@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>公司新闻  /  新闻资讯_中业科技——让全球沟通更简单</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+  <link rel="stylesheet" href="./css/articale.css">
+  <link rel="stylesheet" href="./css/element.css" />
+  <style>
+    .el-menu--popup{
+   min-width:100px!important;
+ }
+ .el-menu--horizontal{
+   left:975px;
+ }
+  </style>
+</head>
+<body>
+    <div id="app" >
+        <header class="home_nav_top">
+            <div class="header_nav" id="onediv" style="position: static; margin: 0px; top: -15px; left: 0px; height: 87px; background: rgb(255, 255, 255);">
+            <div class="container" style="width:100%; margin: 0 25%;">
+                <!-- 头部信息 -->
+              <div class="logo"><a href="preIndex.html"><img style="width: 200px;" :src="headerLogo" alt=""></a></div>
+              <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-submenu :index="`${ind}`" v-for="(value,ind) in resBody" :key="ind">
+                  <template slot="title">{{value.navigation_name}}</template>
+                      <el-menu-item v-if="value.children!=''" index="`${i}`" v-for="(v,i) in value.children" :key="i"><a :href=`articale.html?target_id1=${v.target_id1}`>{{v.navigation_name}}</a></el-menu-item>
+                </el-submenu>
+              </el-menu>
+              <!-- <div class="line"></div> -->
+              <div class="clear"></div>
+            </div>
+          </div>
+        </header>
+<div class="banner">
+  <img :src="banImage.event_img" > 
+</div>
+<div class="con_t">
+    <div class="container">
+      <ul >
+        <li>
+          <a class="on">{{rns}}</a>
+        </li>
+      </ul>
+    </div>
+</div>
+<div class="s7">
+    <ul>
+        <li v-for="(value,index) in list" :key="index">
+            <a :href=`main.html?column_id=${value.column_id}&article_id=${value.article_id}`>
+                <h2><b>{{value.article_name}}</b></h2><span>{{value.release_time}}</span><img :src="value.additional_cover" >
+                <p>{{value.article_name}}</p>
+                <e>查看详情 ></e> 
+            </a>
+        </li>
+        <div class="clear"></div>
+    </ul>
+</div>
+<div class="page row_flex cen_flex">
+  <div class="block">
+    <el-pagination
+    @size-change="handleSizeChange"   
+    @current-change="handleCurrentChange"
+    :current-page="currentPage"
+    :page-sizes="[6,12]"
+    :page-size="pageSize"
+    layout="total, sizes, prev, pager, next, jumper"
+    :total="total"
+  >
+    </el-pagination>
+  </div>
+</div>
+
+<!-- 页脚部分 -->
+<div class="footer">
+    <div class="container">
+      <ul class="heig">
+        <li v-for="(vf,ie) in foot" :key="ie">
+          <h2>{{vf.navigation_name}}</h2>
+          <div v-for="(ve,ix) in vf.children">
+            <p v-if="ve.navigation_img==''">
+              <a :href=`articale.html?target_id1=${ve.target_id1}`>
+                <span>•</span>{{ve.navigation_name}}
+              </a>
+            </p>
+            <p v-else>
+              <a :style="`background:url(${ve.navigation_img})  no-repeat left center; padding-left:25px;`">{{ve.navigation_name}}</a>
+            </p>
+          </div>
+        </li>
+      <div class="clear"></div>
+      </ul>
+      <div class="wx">
+      <p><img :src="weib">{{weibo}}</p>
+      <p><img :src="weix">{{weixin}}</p>
+      </div>
+      <div class="clear"></div>
+      <ul class="bottm_bac" style="width:100%;">
+        <p :style="`background:url(${b_i}) no-repeat `"><a target="_blank" style="color:#fff; margin-left:20px; margin-right: 20px; text-align: center;">{{bottom.data_remark}}</a></p>
+        <p :style="`background:url(${t_i}) no-repeat  `"><a target="_blank" style="color:#fff; margin-left:20px; text-align: center;">{{bot.data_remark}}</a></p>
+        <!-- <div class="clear"></div> -->
+      </ul>
+    </div>
+</div>
+</div>
+</body>
+  <script src="./js/jquery-1.12.4.js"></script>
+  <script src="./add.js/footer.js"></script>
+  <script src="./js/vue.js"></script>
+  <script src="./js/element.js"></script>
+  <script src="./js/axios.js"></script>
+  <script src="./js/pub.js"></script>
+  <script src="./add.js/articale.js"></script>
+</html>

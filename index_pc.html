@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>让全球沟通更简单</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/preindex.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/element.css" />
+    <style>
+        .el-carousel__item h3 {
+            color: #475669;
+            font-size: 14px;
+            opacity: 0.75;
+            line-height: 200px;
+            margin: 0;
+        }
+        .service-detail-wrap a:hover{
+            color:aliceblue!important;
+        }
+        [v-cloak]{
+            display: none!important;
+        }
+        .home_nav_top{
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 1000;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak >
+    <header class="home_nav_top">
+        <div class="header_nav" id="onediv" style="position: static; margin: 0px; top: -15px; left: 0px; height: 87px; background: rgb(255, 255, 255);">
+            <div class="container" style="width: 100%; margin: 0 25%;">
+                <!-- 头部信息 -->
+                                <div class="logo"><a href="preIndex.html"><img style="width: 200px;" src="http://192.168.35.246:80/website-zy/download/20191213175153_logo_副本.png" alt=""></a></div>
+                <!-- 导航栏 -->
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" >
+                <el-submenu index="0">
+                    <template slot="title">关于中业</template>
+                    <el-menu-item  index="0"><a href="articale.html?target_id1=9201912091312710">公司简介</a></el-menu-item>
+                </el-submenu>
+                <el-submenu index="1">
+                    <template slot="title">企业文化</template>
+                    <el-menu-item  index="0"><a href="articale.html?target_id1=8201912091312210">公司理念</a></el-menu-item>
+                    <el-menu-item  index="1"><a href="articale.html?target_id1=920191209131278">发展战略</a></el-menu-item>
+                    <el-menu-item  index="2"><a href="articale.html?target_id1=2201912091312637">发展历程</a></el-menu-item>
+                </el-submenu>
+                <el-submenu index="2">
+                    <template slot="title">产品与服务</template>
+                    <el-menu-item  index="0"><a href="articale.html?target_id1=1201912101412865">产品展示</a></el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title">公司新闻</template>
+                    <el-menu-item  index="0"><a href="articale.html?target_id1=6201912091312874">新闻动态</a></el-menu-item>
+                    <el-menu-item  index="1"><a href="articale.html?target_id1=8201912091312997">企业内刊</a></el-menu-item>
+                </el-submenu>
+                <el-submenu index="4">
+                    <template slot="title">投资者关系</template>
+                    <el-menu-item  index="0"><a href="articale.html?target_id1=6201912091312140">基本信息</a></el-menu-item>
+                    <el-menu-item  index="1"><a href="articale.html?target_id1=4201912091312852">公司公告</a></el-menu-item>
+                    <el-menu-item  index="2"><a href="articale.html?target_id1=6201912091312814">联系我们</a></el-menu-item>
+                </el-submenu>
+                </el-menu>
+                <!-- <div class="line"></div> -->
+                <!-- <div class="clear"></div> -->
+            </div>
+        </div>
+    </header>
+    <!-- 轮播图 -->
+    <div id="slideBox" class="slideBox">
+        <div class="block">
+            <el-carousel :interval="4000" type="card" height="408px">
+                <el-carousel-item>
+                    <img  class="carouse_img" src="http://192.168.35.246:80/website-zy/download/20191213180650_banner_1.jpg" style="width: 100%; height: 360px;" alt="" />
+                </el-carousel-item>
+                <el-carousel-item>
+                    <img  class="carouse_img" src="http://192.168.35.246:80/website-zy/download/20191213181121_banner_2.jpg" style="width: 100%; height: 360px;" alt="" />
+                </el-carousel-item>
+                <el-carousel-item>
+                    <img  class="carouse_img" src="http://192.168.35.246:80/website-zy/download/20191213181130_banner_3.jpg" style="width: 100%; height: 360px;" alt="" />
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+    </div>
+    <!-- 关于中业 -->
+    <div class="s1" style="padding-top: 26px;">
+        <div class="container">
+            <div class="s1_l f_l">
+                <video controls="" width="335" height="230" src="http://192.168.35.246:80/website-zy/download/20191209141947_video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="s1_r f_r">
+                <div class="s1_rt">
+            <big>COMPANY PROFILE</big>
+        <a href="articale.html?target_id1=9201912091312710">公司简介</a>
+                </div>
+<p>中业科技（英文简称zoneyet）股票代码（834134）是一家以人工智能（AI）混合翻译为核心，服务于全球互联网社交、电子商务、政务等相关跨境领域的高科技互联网企业。其包含人机互助混合翻译服务、多语言社交网络服务、移动互联网行业应用服务以及智能硬件场景应用服务四大业务板块，其旗下产品有......
+    <a href="articale.html?target_id1=9201912091312710">了解更多→</a>
+</p>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+
+<!-- 产品与服务 -->
+<div class="main-item-content-wrap">
+    <div style="margin:0 auto;width:990px;text-align:center">
+        <p style="color: #053596;margin-bottom: 10px;font-size: 26px;font-weight: bold;">PRODUCTS AND SERVICES</p>
+    <p style="color: #053596;margin-bottom: 58px;font-size: 16px;font-weight: bold;">产品展示</p>
+</div>
+<ul class="main-item-content">
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183731_aiPingtai.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182402_apiJie.png">
+                        </div>
+                        <h2>智能硬件</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=8201912091512769" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183745_AnySay.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182414_aiKaifang.png">
+                        </div>
+                        <h2>解决方案</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=4201912091512293" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183758_apibg.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182502_trycan.png">
+                        </div>
+                        <h2>Trycan</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=1201912091512699" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183813_bg_banbao.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182516_trycan.png">
+                        </div>
+                        <h2>GaGaHi</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=6201912091512788" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183826_GaGaHibei.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182541_AnySaybei.png">
+                        </div>
+                        <h2>随译</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=8201912091512842" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+    <li class="ai-teck-item ai-teck-voice-synch" style="background-image:url(http://192.168.35.246:80/website-zy/download/20191210183853_wanyibg.png)" >
+                <div class="service-part-wrap" >
+                    <div class="service-part-desc">
+                        <i class="icons service-part-logo icons-part-voice-synch"></i>
+                        <div class="service-part-title"></div>
+                        <div class="service-part-info">
+                            <img src="http://192.168.35.246:80/website-zy/download/20191210182608_wanYi.png">
+                        </div>
+                        <h2>腕译</h2>
+                    </div>
+                </div>
+                <div class="service-detail-wrap">
+                    <div></div>
+                <p><a href="main.html?column_id=1201912101412865&article_id=1201912091512341" target="_blank">查看详情</a></p>
+            </div>
+            </li>
+            </ul>
+        </div>
+        <!-- 页脚部分 -->
+        <div class="footer">
+            <div class="container">
+                <ul>
+                    <li>
+                        <h2>加入我们</h2>
+                        <p>
+                            <a href="articale.html?target_id1=7201912091412688">
+                                <span>•</span>人才理念
+                            </a>
+                        </p>
+                        <p>
+                            <a href="articale.html?target_id1=1201912091412337">
+                                <span>•</span>中业招聘
+                            </a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2>用户隐私</h2>
+                        <p>
+                            <a href="articale.html?target_id1=6201912091412610">
+                                <span>•</span>隐私策略
+                            </a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2>法律声明</h2>
+                        <p>
+                            <a href="articale.html?target_id1=920191209141270">
+                                <span>•</span>服务协议
+                            </a>
+                        </p>
+                        <p>
+                            <a href="articale.html?target_id1=6201912091412366">
+                                <span>•</span>知识产权
+                            </a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2>联系我们</h2>
+                        <p>
+                            <a href="articale.html?target_id1=9201912091412459">
+                                <span>•</span>客户服务
+                            </a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2>关注我们</h2>
+                        <p>
+                            <a href="" style="background:url(http://192.168.35.246:80/website-zy/download/20191209143706_f2.jpg) no-repeat left center; padding-left:25px;">微信公众号
+                            </a>
+                        </p>
+                        <p>
+                            <a href="" style="background:url(http://192.168.35.246:80/website-zy/download/20191209143733_f3.jpg) no-repeat left center; padding-left:25px;">新浪微博
+                            </a>
+                        </p>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+                <div class="wx">
+                    <p ><img src="http://192.168.35.246:80/website-zy/download/20191213181521_1576231760.png">新浪微博</p>
+                    <p><img src="http://192.168.35.246:80/website-zy/download/20191213181526_1576231760.png">微信公众号</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="container">
+                <ul>
+                    <p style="background:url(http://192.168.35.246:80/website-zy/download/20191209145346_tb.jpg) no-repeat left center;">中业科技Copyright@2014 豫ICP备11032422号-5 </p>
+                    <span style="background:url(http://192.168.35.246:80/website-zy/download/20191209145220_tb2.jpg) no-repeat left center;">豫公安网备41019702002084号</span>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="./add.js/footer.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/element.js"></script>
+    <script src="./js/axios.js"></script>
+    <script src="./js/pub.js"></script>
+    <script src="./add.js/preindex.js"></script>
+    <script src="${request.contextPath}/statics/js/modules/works/js/jquery-1.12.4.js"></script>
+    <script src="${request.contextPath}/statics/js/modules/works/ftl/config_m.js"></script>
+</body>
+</html>

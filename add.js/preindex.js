@@ -1,0 +1,65 @@
+var  app =new Vue({
+  el:"#app",
+  name: "First",
+  data:{
+    activeIndex: '1',
+    headerLogo:"",
+    resBody:[],
+    resImage:[],
+    svideo:"",
+    aboutTitle:'',
+    about:'',
+    aboutWen:'',
+    mainTitle:'',
+    maintit:'',
+    article:[],
+    foot:[],
+    footer:[],
+    column_id:"",
+    about_column_id:'',
+    targe:'',
+    bottom:'',
+    bot:'',
+    b_i:'',
+    t_i:'',
+    weibo:'',
+    weib:'',
+    weix:'',
+    weixin:''
+  },
+  created(){
+    pub._InitAxios({
+      _url:pub._url,
+      ur:pub._DetailApi.getHomePage,
+      data:{terminal_id:"91"},
+      cbk:(res)=>{
+        console.log(res.data);
+        this.resBody=res.data.param['91_pc_main_nav'].navigation_bar.children;
+        this.targe=this.resBody[0].children[0].target_id1;
+        this.svideo=res.data.param['91_pc_about_us'].columns.column_video;
+        this.about=res.data.param['91_pc_about_us'].columns.column_name;
+        this.about_column_id=res.data.param['91_pc_about_us'].columns.column_id;
+        this.aboutTitle=res.data.param['91_pc_about_us'].columns.column_title;
+        this.aboutWen=res.data.param['91_pc_about_us'].columns.column_remarks;
+        this.mainTitle=res.data.param['91_pc_products_services'].columns.column_title;
+        this.maintit=res.data.param['91_pc_products_services'].columns.column_name;
+        this.article=res.data.param['91_pc_products_services'].columns;
+        this.headerLogo=res.data.logo.data_img;//顶部logo
+        this.resImage=res.data.param['91_pc_main_carousel'].carousel_msg;
+        //页底内容
+        this.foot=res.data.param['91_pc_bottom_nav'].navigation_bar.children;
+        this.f_img=res.data.param['91_pc_bottom_nav'].navigation_bar.children[0].children[0].navigation_img;
+        console.log(this.f_img);
+        this.weib=res.data.webdata.micro_blog.data_img;
+        this.weibo=res.data.webdata.micro_blog.data_name;
+        this.weix=res.data.webdata.wechat.data_img;
+        this.weixin=res.data.webdata.wechat.data_name;
+        this.bottom=res.data.webdata.record_number1;
+        this.b_i=res.data.webdata.record_number1.data_img;
+        this.bot=res.data.webdata.record_number2;
+        this.t_i=res.data.webdata.record_number2.data_img;
+        // console.log(this.foot);
+      }
+    })
+  }
+})

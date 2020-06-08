@@ -1,0 +1,96 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="menu" id="menu">
+        <li class="cur"><div οnclick="menuChange(0)">KL介绍</div></li>
+        <li><div οnclick="menuChange(1)">技术属性</div></li>
+        <li><div οnclick="menuChange(2)">项目创新</div></li>
+        <li><div οnclick="menuChange(3)">盈利模式</div></li>
+        <li><div οnclick="menuChange(4)">经济模式</div></li>
+        <li><div οnclick="menuChange(5)">联系我们</div></li>    
+    </ul>       
+    <div>       
+        <div id="#home">hrthr</div>
+        <div id="#tech">hrhtr</div>
+        <div id="#innovate">rhthr</div>
+        <div id="#gain">rthtr</div>
+        <div id="#economics">hrt</div>       
+        <div id="#link">rhtrh</div>
+    </div>
+    <div id="#home">55555555555</div>
+    <script>
+     //标题对象
+          var title = document.getElementById("title");  
+      //菜单对象
+      var menu = document.getElementById("menu");  
+      //正文对象
+
+      var content = document.getElementById("content");  
+
+       //当前标题据顶部高度
+
+      var titleTop = title.offsetTop; 
+
+      //当前标题高度
+
+      var titleHeight = title.offsetHeight; 
+      //对象子节点
+      var contentChild = content.children;  
+      //菜单子节点
+      var menuChild = menu.children;
+//导航栏随页面滚动而水平切换
+
+    window.onscroll = function(){
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;   
+      for(var i=0;i<menuChild.length;i++){  
+        if( scrollTop + titleHeight >= contentChild[i].offsetTop){  
+            for(var j=0;j<menuChild.length;j++){  
+                menuChild[j].className = "";  
+            }  
+            menuChild[i].className = "cur";  
+       }  
+    }  
+  };
+
+//点击菜单跳转到指定位置
+ function menuChange(menuType){
+    //定义id 
+    var menuTypeId;
+    switch(menuType){
+      case 0:
+         menuTypeId = "#home";
+         break; 
+      case 1:
+         menuTypeId ="#tech";
+         break; 
+      case 2:
+         menuTypeId ="#innovate";
+         break; 
+      case 3:
+         menuTypeId ="#gain";
+         break; 
+      case 4:
+         menuTypeId ="#economics";
+         break; 
+      case 5:
+         menuTypeId ="#link";
+         break; 
+      default:
+         menuTypeId ="#home";
+         break; 
+    }
+    $("html, body").animate({
+      scrollTop: $(menuTypeId).offset().top- titleHeight}, {duration: 500,easing: "swing"
+    });//scrollTop:指定相关模块回到指定位置（该位置要去掉菜单导航栏高度）。
+
+  };
+    </script>
+    <script src="./js/jquery-1.12.4.js"></script>
+</body>
+</html> -->

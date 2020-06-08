@@ -1,0 +1,701 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>内部特殊功能</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="./css/element.css" />
+  <link rel="stylesheet" href="./css/ay.css">
+  <link rel="stylesheet" href="./css/w.css">
+  <style>
+    .el-menu--popup {
+      min-width: 100px !important;
+    }
+
+    .el-menu--horizontal {
+      left: 975px;
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+
+    .el-pagination {
+      line-height: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <header class="home_nav_top">
+      <div class="header_nav" id="onediv"
+        style="position: static; margin: 0px; top: -15px; left: 0px; height: 87px; background: rgb(255, 255, 255);">
+        <div class="container" style="width:100%; margin: 0 25%;">
+          <!-- 头部信息 -->
+          <div class="logo"><a href="preIndex.html"><img style="width: 200px;" :src="headerLogo" alt=""></a></div>
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+            <el-submenu :index="`${ind}`" v-for="(value,ind) in resBody" :key="ind">
+              <template slot="title">{{value.navigation_name}}</template>
+              <el-menu-item index="`${i}`" v-for="(v,i) in value.children" :key="i">
+                <span v-if="value.children!='' && v.target_type=='target_internal_link' "  @click="roleupdate(i)">{{v.navigation_name}}</span>
+                <a v-else :href=`articale.html?target_id1=${v.target_id1}`>{{v.navigation_name}}</a>
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+          <!-- <div class="line"></div> -->
+          <div class="clear"></div>
+        </div>
+      </div>
+    </header>
+    <div class="banner">
+      <img :src="banImage.event_img">
+    </div>
+    <template>
+      <el-tabs v-model="activeName" @tab-click="handleClick" class="con_t">
+        <el-tab-pane v-for="(item,index) in resData.children" :label="item.navigation_name" :name="`${index}`">
+          <div class="liu_yan" v-if="index==0">
+            <div class="nav_contain">
+              <div class="online">
+                <h1 class="liu">在线留言</h1>
+              </div>
+              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"
+                class="demo-ruleForm liu_yan">
+                <el-form-item label="手机号码" prop="phone_number" :rules="[
+                    { required: true, message: '手机号码不能为空'},
+                    { type: 'number', message: '手机号码必须为数字值'}
+                  ]">
+                  <el-input type="age" v-model.number="ruleForm.phone_number" autocomplete="off" class="in_put">
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="email" label="邮箱" :rules="[
+                  { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                  { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                ]">
+                  <el-input v-model="ruleForm.email" class="in_put"></el-input>
+                </el-form-item>
+                <el-form-item label="留言" prop="desc">
+                  <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="submitForm()">提交</el-button>
+                  <el-button @click="detalForm('ruleForm')">取消</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+          </div>
+          <div class="liu_yan" v-if="index==1">
+            <div class="huiyaun_contain">
+              <div class="online">
+                <h1 class="liu">会员注册</h1>
+              </div>
+              <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px"
+                class="demo-ruleForm liu_yan" status-icon>
+                <el-form-item label="账号名称" prop="u_name">
+                  <el-input v-model="ruleForm2.u_name" class="in_put"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号码" prop="phone_number" :rules="[
+                  { required: true, message: '手机号码不能为空'},
+                  { type: 'number', message: '手机号码必须为数字值'}
+                ]">
+                  <el-input type="age" v-model.number="ruleForm2.phone_number" autocomplete="off" class="in_put">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="pass" :rules="[
+              { required: true, message: '密码不能为空'}
+            ]">
+                  <el-input type="password" v-model="ruleForm2.pass" autocomplete="off" class="in_put"></el-input>
+                </el-form-item>
+                <el-form-item prop="e_email" label="邮箱" :rules="[
+                { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+              ]">
+                  <el-input v-model="ruleForm2.e_email" class="in_put"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="submitForm2()">提交</el-button>
+                  <el-button @click="detalForm('ruleForm')">取消</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+          </div>
+          <div class="zhao_pin" v-if="index==2">
+            <ul class="zhao_ul">
+              <li v-for="(value,index) in list" v-show="isHide" :key="index" @click="one()">
+                <span href="#" id="targe" @click="setparam(value.job_id)">
+                  <h2><b>{{value.job_label}}</b></h2>
+                  <div class="add_num">招聘人数:{{value.job_number}}</div>
+                  <div class="add_res">工作地点:{{value.job_address}}</div>
+                  <p>发布日期:{{value.add_time}}</p>
+                </span>
+
+              </li>
+
+              <div class="clear"></div>
+            </ul>
+            <div class="art" v-show="isHi" style="padding-left: 20%;">
+              <div class="art_contain">
+                <div>
+                  <div>
+                    <div class="newsft_title">
+                      <h1>{{job_label}}</h1>
+
+                      <div class="newsft_time">工作地点:{{job_address}}</div>
+
+                      <div class="newsft_time">招聘人数:{{job_number}}</div>
+
+                    </div>
+                    <div class="new_transcript_content" v-html="job_msg">任职要求:
+                      {{job_msg}}
+                    </div>
+                    <div>
+                      <el-button type="text" @click="update()">投递简历</el-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <el-dialog title="提交简历" :visible.sync="dialogFormVisible">
+              <el-form :model="form" :model="tsValidateForm" ref="tsValidateForm" class="demo-ruleForm">
+                <el-form-item label="姓名" :label-width="formLabelWidth" class="is-required">
+                  <el-input v-model="form.recruit_name" autocomplete="off"></el-input>
+                </el-form-item>
+              </el-form>
+              <el-form :model="form">
+                <el-form-item label="手机号码" prop="ts_number" :rules="[
+                { required: true, message: '手机号码不能为空'},
+                { type: 'number', message: '手机号码必须为数字值'}
+              ]" :label-width="formLabelWidth" class="is-required">
+                  <el-input type="age" v-model.number="form.ts_number" autocomplete="off"></el-input>
+                </el-form-item>
+              </el-form>
+              <el-form :model="form">
+                <el-form-item prop="ts_email" :rules="[
+                { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                ]" label="邮箱" :label-width="formLabelWidth" class="is-required">
+                  <el-input v-model="form.ts_email" autocomplete="off"></el-input>
+                </el-form-item>
+              </el-form>
+              <el-form :model="form">
+                <el-form-item label="简历上传" :label-width="formLabelWidth">
+                  <el-upload ref="uploadWord" action="http://192.168.35.246/website-zy/plug/uploadPic"
+                    :before-upload="handlePreview" :on-success="handleAvatarSuccess" :on-remove="handleRemove"
+                    :before-remove="beforeRemove" multiple :limit="1" :on-change="fileChange" :on-error="handleError"
+                    :on-exceed="handleExceed" :file-list="fileList" v-model="form.fileUrl">
+                    </v-model>
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过500kb</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="makesure(job_id)">确 定</el-button>
+              </div>
+            </el-dialog>
+            <div class="page row_flex cen_flex" id="targe" v-show="isHide">
+              <div class="block">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                  :current-page="currentPage" :page-sizes="[9,12]" :page-size="pageSize"
+                  layout="total, sizes, prev, pager, next, jumper" :total="total">
+                </el-pagination>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </template>
+    <!-- <template>
+    <el-tabs v-model="activeName" @tab-click="handleClick" class="con_t">
+      <el-tab-pane label="留言管理" name="0" >
+        <div class="liu_yan">
+          <div class="nav_contain">
+            <div class="online">
+              <h1 class="liu">在线留言</h1>
+            </div>
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm liu_yan" >
+                  <el-form-item
+                  label="手机号码"
+                  prop="phone_number"
+                  :rules="[
+                    { required: true, message: '手机号码不能为空'},
+                    { type: 'number', message: '手机号码必须为数字值'}
+                  ]"
+                >
+                  <el-input type="age" v-model.number="ruleForm.phone_number" autocomplete="off" class="in_put"></el-input>
+                </el-form-item>
+                <el-form-item prop="email" label="邮箱"
+                :rules="[
+                  { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                  { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                ]"
+              >
+                <el-input v-model="ruleForm.email" class="in_put"></el-input>
+              </el-form-item>
+              <el-form-item label="留言" prop="desc">
+                <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm()">提交</el-button>
+                <el-button @click="detalForm('ruleForm')">取消</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="会员管理" name="1">
+        <div class="liu_yan">
+          <div class="huiyaun_contain">
+            <div class="online">
+              <h1 class="liu">会员注册</h1>
+            </div>
+            <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm liu_yan" status-icon >
+              <el-form-item label="账号名称" prop="u_name">
+                <el-input v-model="ruleForm2.u_name" class="in_put"></el-input>
+              </el-form-item>
+              <el-form-item
+                label="手机号码"
+                prop="phone_number"
+                :rules="[
+                  { required: true, message: '手机号码不能为空'},
+                  { type: 'number', message: '手机号码必须为数字值'}
+                ]"
+              >
+                <el-input type="age" v-model.number="ruleForm2.phone_number" autocomplete="off" class="in_put"></el-input>
+              </el-form-item>
+              <el-form-item label="密码" prop="pass" 
+              :rules="[
+              { required: true, message: '密码不能为空'}
+            ]">
+                <el-input type="password" v-model="ruleForm2.pass" autocomplete="off" class="in_put"></el-input>
+              </el-form-item>
+              <el-form-item prop="e_email" label="邮箱"
+              :rules="[
+                { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+              ]"
+            >
+              <el-input v-model="ruleForm2.e_email" class="in_put"></el-input>
+            </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm2()">提交</el-button>
+                <el-button @click="detalForm('ruleForm')">取消</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="招聘管理" name="2" >  
+        <div class="zhao_pin">
+          <ul class="zhao_ul">
+              <li  v-for="(value,index) in list" v-show="isHide" :key="index" @click="one()">            
+                  <span href="#" id="targe" @click="setparam(value.job_id)">
+                      <h2><b>{{value.job_label}}</b></h2>
+                      <div class="add_num">招聘人数:{{value.job_number}}</div>
+                      <div class="add_res">工作地点:{{value.job_address}}</div>
+                      <p>发布日期:{{value.add_time}}</p>
+                  </span> 
+                
+              </li>
+              
+              <div class="clear"></div>
+          </ul>
+          <div class="art" v-show="isHi" style="padding-left: 20%;">
+            <div class="art_contain">
+              <div>
+                <div>
+                  <div class="newsft_title">
+                    <h1>{{job_label}}</h1>
+        
+                      <div class="newsft_time">工作地点:{{job_address}}</div>
+                    
+                      <div class="newsft_time">招聘人数:{{job_number}}</div>
+                    
+                  </div>
+                  <div class="new_transcript_content" v-html="job_msg">任职要求:
+                    {{job_msg}}
+                  </div>
+                  <div>
+                      <el-button  type="text" @click="update()">投递简历</el-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <el-dialog title="提交简历" :visible.sync="dialogFormVisible" >
+            <el-form :model="form" :model="tsValidateForm" ref="tsValidateForm" class="demo-ruleForm">
+              <el-form-item label="姓名" :label-width="formLabelWidth" class="is-required">
+                <el-input v-model="form.recruit_name" autocomplete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-form :model="form">
+              <el-form-item  
+              label="手机号码"
+              prop="ts_number"
+              :rules="[
+                { required: true, message: '手机号码不能为空'},
+                { type: 'number', message: '手机号码必须为数字值'}
+              ]" :label-width="formLabelWidth" class="is-required"
+    >
+                <el-input type="age" v-model.number="form.ts_number" autocomplete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-form :model="form">
+              <el-form-item  
+              prop="ts_email"
+              :rules="[
+                { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                ]"
+              label="邮箱" :label-width="formLabelWidth" class="is-required">
+                <el-input v-model="form.ts_email" autocomplete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-form :model="form">
+              <el-form-item label="简历上传" :label-width="formLabelWidth">
+                <el-upload
+                  ref="uploadWord"
+                  action="http://192.168.35.246/website-zy/plug/uploadPic"
+                  :before-upload="handlePreview"
+                  :on-success="handleAvatarSuccess"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  multiple
+                  :limit="1"
+                  :on-change="fileChange"
+                  :on-error="handleError"
+                  :on-exceed="handleExceed"
+                  :file-list="fileList"
+                  v-model="form.fileUrl"></v-model>
+                  <el-button size="small" type="primary" >点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过500kb</div>
+                  </el-upload>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取 消</el-button>
+              <el-button type="primary" @click="makesure(job_id)">确 定</el-button>
+            </div>
+          </el-dialog>
+          <div class="page row_flex cen_flex" id="targe" v-show="isHide">
+            <div class="block">
+              <el-pagination
+              @size-change="handleSizeChange"   
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="[9,12]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+            >
+              </el-pagination>
+            </div>
+          </div>
+        </div>
+
+      </el-tab-pane>
+    </el-tabs>
+  </template>   -->
+
+    <!-- <div class="con_t">
+    <div class="container">
+      <ul class="u_l">
+        <li v-for="(ve,ind) in con_t" :key="ind"><a :href=`newart.html?target_id1=${ve.children.navigation_name}`  class="on">{{ve.navigation_name}}</a></li>
+      </ul>
+      <div class="zhao_pin" >
+        <ul >
+            <li  v-for="(value,index) in list" v-show="isHide" :key="index" @click="one()">
+             
+                <span href="#" id="targe" @click="setparam(value.job_id)">
+                    <h2><b>{{value.job_label}}</b></h2>
+                    <div class="add_num">招聘人数:{{value.job_number}}</div>
+                    <div class="add_res">工作地点:{{value.job_address}}</div>
+                    <p>发布日期:{{value.add_time}}</p>
+                </span> 
+            </li>
+            <div class="clear"></div>
+        </ul>
+        <div class="art" v-show="isHi" style="padding-left: 20%;">
+          <div class="art_contain">
+            <div>
+              <div>
+                <div class="newsft_title">
+                  <h1>{{job_label}}</h1>
+     
+                    <div class="newsft_time">工作地点:{{job_address}}</div>
+                  
+                    <div class="newsft_time">招聘人数:{{job_number}}</div>
+                  
+                </div>
+                <div class="new_transcript_content" v-html="job_msg">任职要求:
+                  {{job_msg}}
+                </div>
+                <div>
+                    <el-button  type="text" @click="update()">投递简历</el-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <el-dialog title="提交简历" :visible.sync="dialogFormVisible">
+          <el-form :model="form" >
+            <el-form-item label="姓名" :label-width="formLabelWidth" class="is-required">
+              <el-input v-model="form.recruit_name" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item label="手机号码" :label-width="formLabelWidth" class="is-required">
+              <el-input v-model="form.phone" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item label="邮箱" :label-width="formLabelWidth" class="is-required">
+              <el-input v-model="form.newjob" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item label="简历上传" :label-width="formLabelWidth">
+              <el-upload
+                ref="uploadWord"
+                action="http://192.168.35.246/website-zy/plug/uploadPic"
+                :before-upload="handlePreview"
+                :on-success="handleAvatarSuccess"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                multiple
+                :limit="1"
+                :on-change="fileChange"
+                :on-error="handleError"
+                :on-exceed="handleExceed"
+                :file-list="fileList"
+                v-model="form.fileUrl"></v-model>
+                <el-button size="small" type="primary" >点击上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过500kb</div>
+                </el-upload>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="makesure(job_id)">确 定</el-button>
+          </div>
+        </el-dialog>
+        <div class="page row_flex cen_flex" id="targe" v-show="isHide">
+          <div class="block">
+            <el-pagination
+            @size-change="handleSizeChange"   
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[9,12]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+            </el-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="liu_yan" >
+        <div class="huiyaun_contain">
+          <div class="online">
+            <h1 class="liu">会员注册</h1>
+          </div>
+          <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm liu_yan" status-icon >
+            <el-form-item label="账号名称" prop="u_name">
+              <el-input v-model="ruleForm2.u_name" class="in_put"></el-input>
+            </el-form-item>
+            <el-form-item
+              label="手机号码"
+              prop="phone_number"
+              :rules="[
+                { required: true, message: '手机号码不能为空'},
+                { type: 'number', message: '手机号码必须为数字值'}
+              ]"
+            >
+              <el-input type="age" v-model.number="ruleForm2.phone_number" autocomplete="off" class="in_put"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="pass" 
+            :rules="[
+            { required: true, message: '密码不能为空'}
+          ]">
+              <el-input type="password" v-model="ruleForm2.pass" autocomplete="off" class="in_put"></el-input>
+            </el-form-item>
+            <el-form-item prop="e_email" label="邮箱"
+            :rules="[
+              { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+              { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+            ]"
+          >
+            <el-input v-model="ruleForm2.e_email" class="in_put"></el-input>
+          </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm2()">提交</el-button>
+              <el-button @click="detalForm('ruleForm')">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
+      <div class="zhao_pin" >
+        <ul class="zhao_ul">
+            <li  v-for="(value,index) in list" v-show="isHide" :key="index" @click="one()">            
+                <span href="#" id="targe" @click="setparam(value.job_id)">
+                    <h2><b>{{value.job_label}}</b></h2>
+                    <div class="add_num">招聘人数:{{value.job_number}}</div>
+                    <div class="add_res">工作地点:{{value.job_address}}</div>
+                    <p>发布日期:{{value.add_time}}</p>
+                </span> 
+              
+            </li>
+            
+            <div class="clear"></div>
+        </ul>
+        <div class="art" v-show="isHi" style="padding-left: 20%;">
+          <div class="art_contain">
+            <div>
+              <div>
+                <div class="newsft_title">
+                  <h1>{{job_label}}</h1>
+      
+                    <div class="newsft_time">工作地点:{{job_address}}</div>
+                  
+                    <div class="newsft_time">招聘人数:{{job_number}}</div>
+                  
+                </div>
+                <div class="new_transcript_content" v-html="job_msg">任职要求:
+                  {{job_msg}}
+                </div>
+                <div>
+                    <el-button  type="text" @click="update()">投递简历</el-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <el-dialog title="提交简历" :visible.sync="dialogFormVisible" >
+          <el-form :model="form" :model="tsValidateForm" ref="tsValidateForm" class="demo-ruleForm">
+            <el-form-item label="姓名" :label-width="formLabelWidth" class="is-required">
+              <el-input v-model="form.recruit_name" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item  
+            label="手机号码"
+            prop="ts_number"
+            :rules="[
+              { required: true, message: '手机号码不能为空'},
+              { type: 'number', message: '手机号码必须为数字值'}
+            ]" :label-width="formLabelWidth" class="is-required"
+  >
+              <el-input type="age" v-model.number="form.ts_number" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item  
+            prop="ts_email"
+            :rules="[
+              { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+              { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+              ]"
+            label="邮箱" :label-width="formLabelWidth" class="is-required">
+              <el-input v-model="form.ts_email" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form :model="form">
+            <el-form-item label="简历上传" :label-width="formLabelWidth">
+              <el-upload
+                ref="uploadWord"
+                action="http://192.168.35.246/website-zy/plug/uploadPic"
+                :before-upload="handlePreview"
+                :on-success="handleAvatarSuccess"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                multiple
+                :limit="1"
+                :on-change="fileChange"
+                :on-error="handleError"
+                :on-exceed="handleExceed"
+                :file-list="fileList"
+                v-model="form.fileUrl"></v-model>
+                <el-button size="small" type="primary" >点击上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过500kb</div>
+                </el-upload>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="makesure(job_id)">确 定</el-button>
+          </div>
+        </el-dialog>
+        <div class="page row_flex cen_flex" id="targe" v-show="isHide">
+          <div class="block">
+            <el-pagination
+            @size-change="handleSizeChange"   
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[9,12]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+            </el-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>  -->
+    <!-- 页脚部分 -->
+    <div class="footer">
+      <div class="container">
+        <ul class="heig">
+          <li v-for="(vf,ie) in foot" :key="ie">
+            <h2>{{vf.navigation_name}}</h2>
+            <div v-for="(ve,ix) in vf.children">
+              <p v-if="ve.navigation_img==''">
+                <a :href=`articale.html?target_id1=${ve.target_id1}`>
+                  <span>•</span>{{ve.navigation_name}}
+                </a>
+              </p>
+              <p v-else>
+                <a
+                  :style="`background:url(${ve.navigation_img})  no-repeat left center; padding-left:25px;`">{{ve.navigation_name}}</a>
+              </p>
+            </div>
+          </li>
+          <div class="clear"></div>
+        </ul>
+        <div class="wx">
+          <p><img :src="weib">{{weibo}}</p>
+          <p><img :src="weix">{{weixin}}</p>
+        </div>
+        <div class="clear"></div>
+        <ul class="bottm_bac" style="width:100%;">
+          <p :style="`background:url(${b_i}) no-repeat `"><a target="_blank"
+              style="color:#fff; margin-left:20px; margin-right: 20px; text-align: center;">{{bottom.data_remark}}</a>
+          </p>
+          <p :style="`background:url(${t_i}) no-repeat  `"><a target="_blank"
+              style="color:#fff; margin-left:20px; text-align: center;">{{bot.data_remark}}</a></p>
+          <div class="clear"></div>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+<script src="./js/jquery-1.12.4.js"></script>
+<script src="./js/base.js"></script>
+<!-- <script src="./add.js/footer.js"></script> -->
+<script src="./js/vue.js"></script>
+<script src="./js/element.js"></script>
+<script src="./js/axios.js"></script>
+<script src="./js/pub.js"></script>
+<script src="./js/easyUploader.js"></script>
+<script src="./add.js/newart.js"></script>
+
+</html>

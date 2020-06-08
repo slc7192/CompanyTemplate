@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="title">
+        <li id="index" class="one">页面1</li>
+        <div class="two">展示信息1</div>
+        <li id="zf" class="one">页面2</li>
+        <div class="two">展示信息2</div>
+        <li id="gc" class="one">页面3</li>
+        <div class="two">展示信息3</div>
+        <li id="hc" class="one">页面4</li>
+        <div class="two">展示信息4</div>
+    </div>
+</body>
+<script src="./js/jquery-1.12.4.js">
+    $(".one").on('click',function(){
+        $("active").find(".two").hide();
+        $(this).addClass("active").siblings().removeClass("active");
+        $(".active").find(".two").show();
+        })
+</script>
+</html>

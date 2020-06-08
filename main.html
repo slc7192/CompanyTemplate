@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>中业科技荣登河南省最具潜力互联网企业10强_中业科技——让全球沟通更简单</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="./css/element.css">
+<link rel="stylesheet" href="./css/main.css">
+<style>
+ .el-menu--popup{
+   min-width:100px!important;
+ }
+ .el-menu--horizontal{
+   left:975px;
+ }
+</style>
+</head>
+<body>
+<div id="app" >
+  <!-- 页头 -->
+  <header class="home_nav_top">
+    <div class="header_nav" id="onediv" style="position: static; margin: 0px; top: -15px; left: 0px; height: 87px; background: rgb(255, 255, 255);">
+      <div class="container" style="width: 100%; margin: 0 25%;">
+          <!-- 头部信息 -->
+        <div class="logo"><a href="preIndex.html"><img style="width: 200px;" :src="headerLogo" alt=""></a></div>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-submenu :index="`${ind}`" v-for="(value,ind) in resBody" :key="ind">
+            <template slot="title">{{value.navigation_name}}</template>
+                <el-menu-item v-if="value.children!=''" index="`${i}`" v-for="(v,i) in value.children" :key="i"><a :href=`articale.html?target_id1=${v.target_id1}`>{{v.navigation_name}}</a></el-menu-item>
+          </el-submenu>
+        </el-menu>
+        <!-- <div class="line"></div> -->
+        <div class="clear"></div>
+      </div>
+    </div>
+  </header>
+  <div class="banner">
+    <img :src="banImage.event_img" > 
+  </div>
+  <!-- 内容 -->
+  <div class="container">
+    <div class="dy">
+      <div class="xxy">
+
+        <h1>{{title}}</h1>
+        <div style="width:188px; margin:0 auto;" >
+          <p>{{update_time}}</p> 
+          <div class="bdsharebuttonbox" style="text-align:center; width:88px; float:left; margin:0 auto;">
+          <!-- <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+          <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信" style=" background:url(/templets/zhongye/images/wwx.jpg) no-repeat center; width:8px; "></a>
+          <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友" style=" background:url(/templets/zhongye/images/qq.jpg) no-repeat center; width:5px;"></a>-->
+        </div> 
+          <div class="clear"></div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <span style="font-size:18px;">
+            <span style="font-family:comic sans ms,cursive;">
+            </span>
+          </span>
+        </div>
+        <div style="text-align: justify;">
+          <span style="font-size:18px;">
+            <span style="font-family:comic sans ms,cursive;" v-html="ueditor_text">&nbsp; &nbsp; &nbsp; &nbsp;{{ueditor_text}}</span>
+          </span>
+        </div>
+        <div class="art_pic">
+          <img v-for="(artpic,id) of art_pic" :key="id" :src="artpic.file_img" alt="">
+        </div>
+      <br/>
+    </div>
+    
+  </div>
+
+<!-- 页脚部分 -->
+
+<div class="footer">
+    <div class="container">
+      <ul>
+        <li v-for="(vf,ie) in foot" :key="ie">
+          <h2>{{vf.navigation_name}}</h2>
+          <div v-for="(ve,ix) in vf.children">
+            <p v-if="ve.navigation_img==''">
+              <a :href=`articale.html?target_id1=${ve.target_id1}` >
+                <span>•</span>{{ve.navigation_name}}
+              </a>
+            </p>
+            <p v-else>
+              <a :style="`background:url(${ve.navigation_img})  no-repeat left center; padding-left:25px;`">{{ve.navigation_name}}</a>
+            </p>
+          </div>
+        </li>
+      <div class="clear"></div>
+      </ul>
+      <div class="wx">
+      <p><img :src="weib">{{weibo}}</p>
+      <p><img :src="weix">{{weixin}}</p>
+      </div>
+      <ul class="bottm_bac" style="width:100%;">
+        <p :style="`background:url(${b_i}) no-repeat `"><a target="_blank" style="color:#fff; margin-left:20px; margin-right: 20px; text-align: center;">{{bottom.data_remark}}</a></p>
+        <p :style="`background:url(${t_i}) no-repeat  `"><a target="_blank" style="color:#fff; margin-left:20px; text-align: center;">{{bot.data_remark}}</a></p>
+        <!-- <div class="clear"></div> -->
+      </ul>
+    <div class="clear"></div>
+    </div>
+</div>
+
+</div>
+</body>
+<script src="./add.js/header.js"></script>
+<!-- <script src="./add.js/footer.js"></script> -->
+<script src="./js/axios.js"></script>
+<script src="./js/base.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/pub.js"></script>
+<script src="./js/element.js"></script>
+<script src="./js/jquery-1.12.4.js"></script>
+<script src="./add.js/main.js"></script>
+
+</html>

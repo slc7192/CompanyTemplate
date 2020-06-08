@@ -1,0 +1,551 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>公司网站首页配置</title>
+    <#include "/header.html">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/company/element.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/company/style.css">
+    <style>
+        #ftl_phone {
+            width: 100%;
+            height: 900px;
+            margin: 0px auto;
+            padding: 25px;
+        }
+
+        #ftl_phone iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .idx_nav,
+        .idx_banner,
+        .idx_column,
+        .idx_article,
+        .shopType_str,
+        .goodsType_str,
+        .navigationType_str,
+        .navigationAndGoodsType_str,
+        .shopAndGoodsType_str,
+        .bannersType_str {
+            width: 250px;
+            padding: 16px;
+            position: fixed;
+            z-index: 999999;
+            background: white;
+            text-align: center;
+            box-shadow: #aba0a0 0px 0px 10px;
+            border-radius: 5px;
+        }
+
+        #iframe_box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #iframe_in {
+            width: 950px;
+            height: 650px;
+            background-color: transparent
+        }
+
+        .iframe_box_body {
+            padding: 15px;
+            background-color: white;
+            position: relative;
+            margin-top: 100px;
+        }
+
+        .iframe_box_body h6 {
+            text-align: right;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-weight: normal;
+        }
+
+        .iframe_box_body h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        #iframe_box_out {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ftl_phone">
+        <iframe src="./91_company_pc.html?isPc=1&terminal_id=91" frameborder="0"></iframe>
+    </div>
+    <div id="iframe_box_out">
+        <div id='iframe_box'>
+            <div class='iframe_box_body'>
+                <h6 class="iframe_close">关闭</h6>
+                <h3 class="iframe_tit">编辑</h3>
+                <iframe id="iframe_in" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="${request.contextPath}/statics/js/modules/works/js/jquery-1.12.4.js"></script>
+    <script>
+        function Tips() {
+            /**
+             * 导航类型提示
+             */
+            var idx_nav_str = `
+      <div class='idx_nav'>
+        <h3>导航类型</h3>
+        <div>点击即可进行信息配置！</div>
+      </div>
+      `
+            $('body').append(idx_nav_str)
+            $('.idx_nav').hide()
+
+            /**
+             * 轮播类型提示
+             */
+            var idx_ban_str = `
+      <div class='idx_banner'>
+        <h3>轮播类型</h3>
+        <div>点击即可进行信息配置！</div>
+      </div>
+      `
+            $('body').append(idx_ban_str)
+            $('.idx_banner').hide()
+                /**
+                 * 栏目提示
+                 */
+            var idx_column_str = `
+      <div class='idx_column'>
+        <h3>栏目类型</h3>
+        <div>点击即可进行信息配置！</div>
+      </div>  `
+            $('body').append(idx_column_str)
+            $('.idx_column').hide()
+
+            /**
+             * 文章类型提示
+             */
+            var idx_article_str = `
+      <div class='idx_article'>
+        <h3>文章类型</h3>
+        <div>点击即可进行信息配置！</div>
+      </div>
+      `
+            $('body').append(idx_article_str)
+            $('.idx_article').hide()
+
+
+            // 商城类别提示
+            // 商城店铺
+            var shopType_str = `
+      <div class='shopType_str'>
+          <h3>商城店铺类型</h3>
+          <div>点击即可进行信息配置！</div>
+        </div>
+      `
+            $('body').append(shopType_str)
+            $('.shopType_str').hide()
+                // 商城商品
+            var goodsType_str = `
+       <div class='goodsType_str'>
+           <h3>商城商品类型</h3>
+           <div>点击即可进行信息配置！</div>
+         </div>
+       `
+            $('body').append(goodsType_str)
+            $('.goodsType_str').hide()
+                // 商城分类
+            var navigationType_str = `
+      <div class='navigationType_str'>
+          <h3>商城分类类型</h3>
+          <div>点击即可进行信息配置！</div>
+        </div>
+      `
+            $('body').append(navigationType_str)
+            $('.navigationType_str').hide()
+                // 商品类别+商品类型
+            var navigationAndGoodsType_str = `
+       <div class='navigationAndGoodsType_str'>
+           <h3>商品类别+商品类型类型</h3>
+           <div>点击即可进行信息配置！</div>
+         </div>
+       `
+            $('body').append(navigationAndGoodsType_str)
+            $('.navigationAndGoodsType_str').hide()
+                // 店铺+商品分类
+            var shopAndGoodsType_str = `
+      <div class='shopAndGoodsType_str'>
+          <h3>店铺+商品分类类型</h3>
+          <div>点击即可进行信息配置！</div>
+        </div>
+      `
+            $('body').append(shopAndGoodsType_str)
+            $('.shopAndGoodsType_str').hide()
+                // 商城轮播分类
+            var bannersType_str = `
+       <div class='bannersType_str'>
+           <h3>商城轮播分类类型</h3>
+           <div>点击即可进行信息配置！</div>
+         </div>
+       `
+            $('body').append(bannersType_str)
+            $('.bannersType_str').hide()
+
+
+        }
+        Tips()
+
+        function parent_hover_tips(idx_type) {
+            console.log('父级函数', idx_type)
+            const that = $(this)
+            var top = 0 + 'px';
+            var right = 0 + 'px'
+            switch (idx_type) {
+
+                // 商城类
+                case 'shopType':
+                    $('.shopType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.shopType_str').fadeIn()
+                    break;
+                case 'goodsType':
+                    $('.goodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.goodsType_str').fadeIn()
+                    break;
+                case 'navigationType':
+                    $('.navigationType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.navigationType_str').fadeIn()
+                    break;
+                case 'navigationAndGoodsType':
+                    $('.navigationAndGoodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.navigationAndGoodsType_str').fadeIn()
+                    break;
+                case 'shopAndGoodsType':
+                    $('.shopAndGoodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.shopAndGoodsType_str').fadeIn()
+                    break;
+                case 'bannersType':
+                    $('.bannersType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.bannersType_str').fadeIn()
+                    break;
+                    // 信息类官网
+                case 'param_main_bar':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+                case 'param_main_bar1':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+
+                case 'param_navigation_bar':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+                case 'param_carousel':
+                    $('.idx_banner').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_banner').fadeIn()
+                    break;
+                case 'param_main_carousel':
+                    $('.idx_banner').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_banner').fadeIn()
+                    break;
+                case 'param_column_down_column':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+
+                case 'param_columns_articles':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+
+                case 'param_column_same_level':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+                case 'param_column_article':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+                case 'param_article':
+                    $('.idx_article').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_article').fadeIn()
+                    break;
+                default:
+                    //  console.log('其他类型')
+            }
+            // return false
+        };
+
+        function parent_hover_out() {
+            console.log('鼠标移出事件事件')
+            $('.idx_nav').fadeOut()
+            $('.idx_banner').fadeOut()
+            $('.idx_column').fadeOut()
+            $('.idx_article').fadeOut()
+
+            $('.shopType_str').fadeOut()
+            $('.goodsType_str').fadeOut()
+            $('.navigationType_str').fadeOut()
+            $('.navigationAndGoodsType_str').fadeOut()
+            $('.shopAndGoodsType_str').fadeOut()
+            $('.bannersType_str').fadeOut()
+        };
+
+        function parent_click_in(obj) {
+            console.log('点击事件', obj)
+            const that = $(this)
+            var top = 0 + 'px';
+            var right = 0 + 'px'
+            var idx_type = obj.idx_type
+            var idx_name = obj.idx_name
+            var moudel_id = obj.moudel_id
+            var idxFg = obj.idxFg
+            $('.idx_nav').fadeOut()
+            $('.idx_banner').fadeOut()
+            $('.idx_column').fadeOut()
+            $('.idx_article').fadeOut()
+            $('.shopType_str').fadeOut()
+            $('.goodsType_str').fadeOut()
+            $('.navigationType_str').fadeOut()
+            $('.navigationAndGoodsType_str').fadeOut()
+            $('.shopAndGoodsType_str').fadeOut()
+            $('.bannersType_str').fadeOut()
+            switch (idx_type) {
+
+                // 商城类
+                case 'shopType':
+                    console.log('**************')
+                    $('.shopType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.shopType_str').fadeIn()
+                    break;
+                case 'goodsType':
+                    $('.goodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.goodsType_str').fadeIn()
+                    break;
+                case 'navigationType':
+                    $('.navigationType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.navigationType_str').fadeIn()
+                    break;
+                case 'navigationAndGoodsType':
+                    $('.navigationAndGoodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.navigationAndGoodsType_str').fadeIn()
+                    break;
+                case 'shopAndGoodsType':
+                    $('.shopAndGoodsType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.shopAndGoodsType_str').fadeIn()
+                    break;
+                case 'bannersType':
+                    $('.bannersType_str').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.bannersType_str').fadeIn()
+                    break;
+
+
+                case 'param_main_bar':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+                case 'param_main_bar1':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+                case 'param_navigation_bar':
+                    $('.idx_nav').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_nav').fadeIn()
+                    break;
+                case 'param_carousel':
+                    $('.idx_banner').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_banner').fadeIn()
+                    break;
+                case 'param_main_carousel':
+                    $('.idx_banner').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_banner').fadeIn()
+                    break;
+                case 'param_column_down_column':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+
+                case 'param_columns_articles':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+
+                case 'param_column_same_level':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+                case 'param_column_article':
+                    $('.idx_column').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_column').fadeIn()
+                    break;
+                case 'param_article':
+                    $('.idx_article').css({
+                        'top': top,
+                        'right': right
+                    })
+                    $('.idx_article').fadeIn()
+                    break;
+                default:
+                    //  console.log('其他类型')
+            }
+            console.log(obj, 'obj')
+            $("html").css({
+                height: "100%",
+                overflow: "hidden"
+            });
+            $("body").css({
+                height: "100%",
+                overflow: "hidden"
+            });
+            $('#iframe_in').attr('src', './idxConfig.html?moudel_id=' + moudel_id + '&idx_name=' + idx_name + '&idx_type=' + idx_type + '&idxFg=' + idxFg)
+            $('#iframe_box_out').fadeIn()
+            $('#iframe_box').fadeIn()
+
+
+        }
+        /**
+         * 关闭弹框
+         */
+        $('#iframe_box_out').fadeOut()
+        $('#iframe_box').on('click', '.iframe_close', function() {
+            $('#iframe_box_out').fadeOut()
+            $('#iframe_box').fadeOut()
+            $("html").css({
+                height: "100%",
+                overflow: "visible"
+            });
+            $("body").css({
+                height: "100%",
+                overflow: "visible"
+            });
+            $('#iframe_in').attr('src', '')
+        })
+
+        function close_iframe() {
+            $('#iframe_box_out').fadeOut()
+            $('#iframe_box').fadeOut()
+            $("html").css({
+                height: "100%",
+                overflow: "visible"
+            });
+            $("body").css({
+                height: "100%",
+                overflow: "visible"
+            });
+            $('#iframe_in').attr('src', '')
+        }
+    </script>
+</body>
+
+</html>
